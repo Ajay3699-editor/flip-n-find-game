@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip 'n' Find Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="game-page">
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        <header class="game-header">
+            <h1>Flip 'n' Find</h1>
+            <p>Flip the cards and match the pairs!</p>
+        </header>
+
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">Moves</span>
+                <p id="moves-count" class="info-value">0</p>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Time</span>
+                <p id="timer" class="info-value">00:00</p>
+            </div>
+        </div>
+
+        <main id="game-board" class="game-board">
+            <!-- Cards will be injected here by JavaScript -->
+        </main>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <div id="win-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>You Won!</h2>
+            <p class="congrats-message">Incredible memory! You're a true champion.</p>
+            <div class="final-stats">
+                <div class="stat-item">
+                    <span class="info-label">Total Moves</span>
+                    <p id="final-moves" class="stat-value"></p>
+                </div>
+                <div class="stat-item">
+                    <span class="info-label">Total Time</span>
+                    <p id="final-time" class="stat-value"></p>
+                </div>
+            </div>
+            <button id="play-again-btn" class="play-again-button">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

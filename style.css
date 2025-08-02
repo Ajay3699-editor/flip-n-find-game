@@ -1,0 +1,165 @@
+/* --- General & Font Styles --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* --- Landing Page Styles --- */
+.landing-page {
+    position: relative;
+    background-color: #0c0a09; /* Fallback color */
+    /* This path assumes the image is in the same folder as your HTML files */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('landing-background.jpg.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.landing-container {
+    text-align: center;
+    perspective: 800px;
+    position: relative;
+    z-index: 2;
+}
+
+.title-animation {
+    display: flex;
+    font-size: clamp(3rem, 15vw, 7rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.title-animation span {
+    display: inline-block;
+    animation: flipIn 1.5s forwards;
+    animation-delay: calc(0.1s * var(--i));
+    opacity: 0;
+    transform: rotateX(90deg);
+}
+.title-animation .space { width: 1ch; }
+
+@keyframes flipIn {
+    to { opacity: 1; transform: rotateX(0deg); }
+}
+
+.start-button {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(45deg, #f87171, #fb923c, #fbbf24, #a3e635, #4ade80, #34d399);
+    background-size: 300% 300%;
+    color: #111827;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px) scale(1);
+    animation: fadeIn 1s forwards 1.5s, rainbow-bg 4s ease-in-out infinite, pulse 2s infinite 2.5s;
+    transition: transform 0.2s ease-out;
+}
+.start-button:hover { transform: scale(1.1); animation-play-state: paused; }
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rainbow-bg {
+    0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+}
+@keyframes pulse {
+    0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); }
+}
+
+/* --- Game Page Styles --- */
+.game-page {
+    background: linear-gradient(45deg, #818cf8, #c084fc, #f472b6, #fb7185);
+    background-size: 400% 400%;
+    animation: gradient-bg 15s ease infinite;
+}
+@keyframes gradient-bg {
+    0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none; /* Allows clicking through the canvas */
+}
+
+.container { width: 100%; max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+
+.game-header h1 { font-size: 2.5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); margin-bottom: 0.5rem; }
+.game-header p { font-size: 1.125rem; color: #e0e7ff; margin-top: 0; }
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 400px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.info-item { text-align: center; }
+.info-label { font-size: 0.875rem; color: #e0e7ff; }
+.info-value { font-family: 'Roboto Mono', monospace; font-size: 1.875rem; font-weight: 700; color: #fff; margin: 0; }
+
+.game-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; perspective: 1000px; }
+.card { aspect-ratio: 1 / 1; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+.card.flipped { transform: rotateY(180deg); }
+
+.card .front, .card .back {
+    position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; border-radius: 0.75rem; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: all 0.2s ease-in-out;
+}
+
+.card .back { background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.4); }
+.card .back:hover { background: rgba(255, 255, 255, 0.3); }
+.card .back svg { width: 40%; height: 40%; color: #e0e7ff; }
+
+.card .front {
+    background-color: #fff; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2); font-size: clamp(2rem, 10vw, 3.5rem); transform: rotateY(180deg);
+}
+
+.card.matched { transform: rotateY(180deg); pointer-events: none; }
+.card.matched .front { outline: 4px solid #34d399; outline-offset: -4px; }
+
+.back-link { display: inline-block; margin-top: 2rem; color: #fff; text-decoration: none; font-weight: 500; }
+
+/* --- Win Modal Styles --- */
+.modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 0.3s ease-in-out; z-index: 200; }
+.modal-overlay.hidden { opacity: 0; pointer-events: none; }
+
+.modal-content {
+    background-color: white; border-radius: 1rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 2rem; text-align: center; transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); width: 90%; max-width: 400px;
+}
+.modal-overlay:not(.hidden) .modal-content { transform: scale(1); }
+
+.modal-content h2 { font-size: 2.5rem; font-weight: 700; color: #f59e0b; margin: 0 0 1rem; }
+.congrats-message { color: #4b5563; margin: 0 0 1.5rem; }
+.final-stats { display: flex; justify-content: space-around; margin-bottom: 2rem; }
+.stat-value { font-family: 'Roboto Mono', monospace; font-size: 1.5rem; font-weight: 700; color: #1f2937; margin: 0; }
+
+.play-again-button {
+    width: 100%; background-color: #f472b6; color: white; font-weight: 700; padding: 0.75rem 1rem; border: none; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s ease-in-out; transform: scale(1);
+}
+.play-again-button:hover { background-color: #db2777; transform: scale(1.05); }
+
+/* --- Responsive Design --- */
+@media (max-width: 640px) { .game-header h1 { font-size: 2rem; } .game-board { gap: 0.75rem; } }
