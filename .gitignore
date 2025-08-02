@@ -1,0 +1,9 @@
+VS Code specific
+.vscode/
+
+Mac specific
+.DS_Store
+
+Node modules (if you ever use Node.js)
+node_modules/
+npm-debug.log
