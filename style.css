@@ -14,18 +14,36 @@ body {
 .landing-page {
     position: relative;
     background-color: #0c0a09; /* Fallback color */
-    /* This path assumes the image is in the same folder as your HTML files */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('landing-background.jpg.png');
-    background-size: cover;
-    background-position: center;
     overflow: hidden;
+}
+
+.background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
 }
 
 .landing-container {
     text-align: center;
     perspective: 800px;
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Ensure content is above video and overlay */
 }
 
 .title-animation {
